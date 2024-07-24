@@ -4,22 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/styles.css')
   body
-    h1 Countries by Population
+    h1 Cities by Population
     table
       thead
         tr
-          th Code
           th Name
-          th Continent
-          th Region
+          th Country Code
+          th District
           th Population
-          th Capital
       tbody
-        each country in countries
+        if cities.length
+          each city in cities
+            tr
+              td= city.Name
+              td= city.CountryCode
+              td= city.District
+              td= city.Population
+        else
           tr
-            td= country.Code
-            td= country.Name
-            td= country.Continent
-            td= country.Region
-            td= country.Population
-            td= country.Capital
+            td(colspan="4") No data available

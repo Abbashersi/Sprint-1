@@ -8,14 +8,17 @@ const PORT = process.env.PORT || 3000;
 
 // MySQL Database connection
 const db = mysql.createConnection({
-  host: 'localhost',
+  host: '127.0.0.1',
   user: 'root',
-  password: '',
+  password: 'new_password', // Replace with your actual password
   database: 'world'
 });
 
 db.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error('Database connection failed:', err.stack);
+    return;
+  }
   console.log('Connected to MySQL Database');
 });
 
@@ -38,16 +41,24 @@ app.get('/', (req, res) => {
 app.get('/countries', (req, res) => {
   const query = 'SELECT * FROM country ORDER BY Population DESC';
   db.query(query, (err, results) => {
-    if (err) throw err;
-    res.render('countries', { title: 'Countries', countries: results });
+    if (err) {
+      console.error('Error executing query:', err.stack);
+      res.status(500).send('Database query error');
+      return;
+    }
+    res.render('countries', { title: 'Countries', countries: results || [] });
   });
 });
 
 app.get('/cities', (req, res) => {
   const query = 'SELECT * FROM city ORDER BY Population DESC';
   db.query(query, (err, results) => {
-    if (err) throw err;
-    res.render('cities', { title: 'Cities', cities: results });
+    if (err) {
+      console.error('Error executing query:', err.stack);
+      res.status(500).send('Database query error');
+      return;
+    }
+    res.render('cities', { title: 'Cities', cities: results || [] });
   });
 });
 
