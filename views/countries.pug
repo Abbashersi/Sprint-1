@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/styles.css')
+  body
+    h1 Countries by Population
+    table
+      thead
+        tr
+          th Code
+          th Name
+          th Continent
+          th Region
+          th Population
+          th Capital
+      tbody
+        each country in countries
+          tr
+            td= country.Code
+            td= country.Name
+            td= country.Continent
+            td= country.Region
+            td= country.Population
+            td= country.Capital
