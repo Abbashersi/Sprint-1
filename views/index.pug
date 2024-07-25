@@ -1,11 +1,197 @@
 doctype html
 html
   head
-    title= title
+    title Welcome to Population Info
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css')
     link(rel='stylesheet', href='/styles.css')
+    style.
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+      }
+      .navbar-brand {
+        font-weight: bold;
+        color: #007bff;
+      }
+      .navbar-brand:hover {
+        color: #0056b3;
+      }
+      .header {
+        background-image: url('wallpaper.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #fff;
+        text-align: center;
+        padding: 100px 20px;
+        position: relative;
+      }
+      .header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+      .header h1, .header p {
+        position: relative;
+        z-index: 2;
+      }
+      .header h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .header p {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+      }
+      .header a {
+        font-size: 1.2rem;
+        padding: 10px 30px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        z-index: 2;
+        position: relative;
+      }
+      .header a:hover {
+        background-color: #0056b3;
+      }
+      .features {
+        padding: 60px 0;
+        background-color: #fff;
+      }
+      .feature {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .card .icon {
+        font-size: 3rem;
+        color: #007bff;
+        margin-bottom: 15px;
+      }
+      .card h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      .card p {
+        font-size: 1rem;
+        color: #666;
+      }
+      .contact {
+        background-color: #343a40;
+        color: #fff;
+        padding: 60px 0;
+      }
+      .contact h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+      .contact .form-control, .contact .btn {
+        border-radius: 5px;
+      }
+      .contact .btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+      }
+      .contact .btn:hover {
+        background-color: #0056b3;
+      }
+      .footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        position: relative;
+        width: 100%;
+        text-align: center;
+      }
+      .footer a {
+        color: #6c757d;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      .footer a:hover {
+        color: #e9ecef;
+      }
   body
-    h1= message
-    p
-      a(href='/countries') View Countries
-    p
-      a(href='/cities') View Cities
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+      .container-fluid
+        a.navbar-brand(href='#') Population Info
+        button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse#navbarNav
+          ul.navbar-nav.ms-auto
+            li.nav-item
+              a.nav-link.active(href='/countries') Countries
+            li.nav-item
+              a.nav-link(href='/cities') Cities
+            li.nav-item
+              a.nav-link(href='#features') Features
+            li.nav-item
+              a.nav-link(href='#contact') Contact
+    .header
+      .container
+        h1 Welcome to Population Info
+        p Discover comprehensive data about populations around the world. Explore our features to learn more.
+        a(href='/countries') Explore Countries
+    .features#features
+      .container
+        h2.text-center.mb-5 Our Features
+        .row
+          .col-md-4
+            .card
+              .icon.bi.bi-globe
+              h3 Global Data Coverage
+              p Access detailed information on countries and cities from every corner of the world, organized by population.
+          .col-md-4
+            .card
+              .icon.bi.bi-bar-chart-line
+              h3 Advanced Analytics
+              p Utilize advanced analytics tools to visualize population data and trends, aiding research and decision-making.
+          .col-md-4
+            .card
+              .icon.bi.bi-people
+              h3 User-Friendly Interface
+              p Experience a seamless and intuitive interface designed to make finding and understanding population data easy.
+    .contact#contact
+      .container
+        .row
+          .col-md-8.offset-md-2
+            h2.text-center Contact Us
+            p.text-center If you have any questions or feedback, feel free to get in touch with us using the form below.
+            form(method='POST', action='/contact')
+              .mb-3
+                input.form-control(type='text', placeholder='Your Name', required)
+              .mb-3
+                input.form-control(type='email', placeholder='Your Email', required)
+              .mb-3
+                textarea.form-control(placeholder='Your Message', rows='5', required)
+              .text-center
+                button.btn.btn-primary(type='submit') Send Message
+    footer.footer
+      .container
+        p.mb-0 &copy; 2024 Population Info. All rights reserved.
+        p.mb-0
+          a(href='#') Privacy Policy
+          | |
+          a(href='#') Terms of Service
+          | |
+          a(href='#') Contact
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js')

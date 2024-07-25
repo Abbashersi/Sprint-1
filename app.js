@@ -61,6 +61,24 @@ app.get('/cities', (req, res) => {
     res.render('cities', { title: 'Cities', cities: results || [] });
   });
 });
+app.get('/search', (req, res) => {
+  const searchTerm = req.query.query;
+  if (!searchTerm) {
+    return res.redirect('/countries');
+  }
+
+  const query = `SELECT * FROM country WHERE Name LIKE ? OR Code LIKE ? ORDER BY Population DESC`;
+  const values = [`%${searchTerm}%`, `%${searchTerm}%`];
+
+  db.query(query, values, (err, results) => {
+    if (err) {
+      console.error('Error executing search query:', err.stack);
+      return res.render('error', { title: 'Search Error', message: 'An error occurred during the search.', countries: [] });
+    }
+
+    res.render('countries', { title: 'Search Results', countries: results });
+  });
+});
 
 // Error handling
 app.use((req, res) => {
