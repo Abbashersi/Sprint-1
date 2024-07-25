@@ -61,13 +61,30 @@ app.get('/cities', (req, res) => {
     res.render('cities', { title: 'Cities', cities: results || [] });
   });
 });
+
+app.get('/search-cities', (req, res) => {
+  const searchQuery = req.query.query;
+  if (!searchQuery) {
+    return res.redirect('/cities');
+  }
+
+  const query = 'SELECT * FROM city WHERE Name LIKE ? ORDER BY Population DESC';
+  db.query(query, [`%${searchQuery}%`], (err, results) => {
+    if (err) {
+      console.error('Error executing search query:', err.stack);
+      return res.render('error', { title: 'Search Error', message: 'An error occurred during the search.', cities: [] });
+    }
+    res.render('cities', { title: 'Cities by Population', cities: results });
+  });
+});
+
 app.get('/search', (req, res) => {
   const searchTerm = req.query.query;
   if (!searchTerm) {
     return res.redirect('/countries');
   }
 
-  const query = `SELECT * FROM country WHERE Name LIKE ? OR Code LIKE ? ORDER BY Population DESC`;
+  const query = 'SELECT * FROM country WHERE Name LIKE ? OR Code LIKE ? ORDER BY Population DESC';
   const values = [`%${searchTerm}%`, `%${searchTerm}%`];
 
   db.query(query, values, (err, results) => {
